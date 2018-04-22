@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
+import { AbilitiesService } from '../abilities.service';
 
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
@@ -15,7 +16,7 @@ describe('HeroDetailComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HeroDetailComponent ],
       imports: [ FormsModule, RouterTestingModule, HttpClientTestingModule ],
-      providers: [ HeroService, MessageService ]
+      providers: [ HeroService, MessageService, AbilitiesService ]
     })
     .compileComponents();
   }));
