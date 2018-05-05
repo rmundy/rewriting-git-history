@@ -7,7 +7,7 @@ export class AbilitiesService {
 
   availableAbilities: String[] = [
     'speed',
-    'stregth',
+    'strength',
     'x-ray vision',
     'flight',
     'mind control',
