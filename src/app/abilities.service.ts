@@ -33,7 +33,7 @@ export class AbilitiesService {
   public getAbilitiesForHero = (hero: Hero) =>
     this.heroAbilities[hero.id] ? this.heroAbilities[hero.id] : [];
 
-  private testForIllegalAbilities = (abilities: String[]) =>
-    difference(abilities, this.availableAbilities).length > 0;
-
+  private testForIllegalAbilities = (abilities: String[]) => abilities
+    .map(i => this.availableAbilities.indexOf(i) < 0)
+    .reduce((acc, next) => acc || next, false);
 }
