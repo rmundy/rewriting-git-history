@@ -4,14 +4,7 @@ import { Hero } from './hero';
 @Injectable()
 export class AbilitiesService {
 
-  constructor() { }
-
-  public getAvailableAbilities = () => this.availableAbilities;
-
-  public setAbilitiesForHero = (hero: Hero, abilities: [String]) =>
-    this.heroAbilities[hero.id] = abilities;
-
-  private availableAbilities: [
+  availableAbilities: String[] = [
     'speed',
     'stregth',
     'x-ray vision',
@@ -21,8 +14,16 @@ export class AbilitiesService {
     'telekinesis'
   ];
 
-  private heroAbilities: {
+  heroAbilities = {
 
   };
+
+  public getAvailableAbilities = () => this.availableAbilities;
+
+  public setAbilitiesForHero = (hero: Hero, abilities: String[]) =>
+    this.heroAbilities[hero.id] = abilities;
+
+  public getAbilitiesForHero = (hero: Hero) =>
+    this.heroAbilities[hero.id] ? this.heroAbilities[hero.id] : [];
 
 }
