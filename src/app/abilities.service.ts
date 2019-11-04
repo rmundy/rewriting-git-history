@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
+import { difference } from 'lodash';
 
 @Injectable()
 export class AbilitiesService {
@@ -20,10 +21,19 @@ export class AbilitiesService {
 
   public getAvailableAbilities = () => this.availableAbilities;
 
-  public setAbilitiesForHero = (hero: Hero, abilities: String[]) =>
-    this.heroAbilities[hero.id] = abilities;
+  public setAbilitiesForHero = (hero: Hero, abilities: String[]) => {
+
+    if (this.testForIllegalAbilities(abilities)) {
+      throw Error('illegal abilities');
+    }
+
+    return this.heroAbilities[hero.id] = abilities;
+  }
 
   public getAbilitiesForHero = (hero: Hero) =>
     this.heroAbilities[hero.id] ? this.heroAbilities[hero.id] : [];
+
+  private testForIllegalAbilities = (abilities: String[]) =>
+    difference(abilities, this.availableAbilities).length > 0;
 
 }
