@@ -1,17 +1,15 @@
 #!/bin/bash
 
-initial_commit=c1e383bb
-git checkout master
-git reset --hard $initial_commit
-git push -u --force
-
-git branch -D start
-git checkout -b start
-
-git cherry-pick 8a9bd42
-git cherry-pick 6348a7a
-git cherry-pick 48230e6
-git cherry-pick 3d95f86
-git cherry-pick 3a843c7
-git cherry-pick b70bc59
+for commit in 8a9bd42 6348a7a 48230e6 3d95f86 3a843c7 b70bc59
+do
+  message=$(git log -n 1 --pretty=format:%s $commit)
+  echo "message is $message"
+  git show $commit > temp.patch
+  git apply temp.patch
+  rm temp.patch
+  git add .
+  git commit -m "$message"
+  sleep 3
+  git commit --amend --no-edit --date "$(date)"
+done
 
